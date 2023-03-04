@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import PostModel from "../models/PostModel";
-import PostService from "../service/PostService";
+import { PostModel } from "src/post/models";
+import { PostService } from "src/post/service";
 
 function PostsPage() {
   const [posts, setPosts] = useState(Array<PostModel>);

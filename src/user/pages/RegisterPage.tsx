@@ -1,4 +1,4 @@
-import RegisterForm from "../forms/RegisterForm";
+import { RegisterForm } from "src/user/forms";
 
 function RegisterPage() {
   return (

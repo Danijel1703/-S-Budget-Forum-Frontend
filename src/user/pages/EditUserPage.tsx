@@ -1,4 +1,4 @@
-import EditUserForm from "../forms/EditUserForm";
+import { EditUserForm } from "src/user/forms";
 
 function EditUserPage() {
   return (

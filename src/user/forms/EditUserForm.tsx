@@ -1,19 +1,9 @@
-import { useEffect, useState } from "react";
-import FormRenderer from "../../utils/FormRenderer";
-import UserModel from "../models/UserModel";
-import UserService from "../service/UserService";
-import EditUserFields from "./EditUserFields";
+import { FormRenderer } from "src/utils";
+import { UserModel } from "src/user/models";
+import { EditUserFields } from "src/user/fields";
 
 function EditUserForm() {
   const onSubmit = (user: UserModel) => {};
-  const [roles, setRoles] = useState([]);
-  const getRoles = async () => {
-    const roles = await UserService.getRoles();
-    return roles;
-  };
-  useEffect(() => {
-    getRoles();
-  }, []);
   return (
     <FormRenderer
       fields={EditUserFields}

@@ -1,7 +1,6 @@
 import axios from "axios";
-import LoginModel from "../models/LoginModel";
-import RegisterModel from "../models/RegisterModel";
-import Role from "../models/RoleModel";
+import { RegisterModel, LoginModel, UserFilterModel } from "src/user/models";
+import { BuildFilter } from "src/utils";
 
 class Service {
   baseUrl = "http://api.forum.local/user";
@@ -10,12 +9,19 @@ class Service {
     await axios.post(`${this.baseUrl}/register`, user);
   }
 
-  async login(user: LoginModel) {
-    await axios.post(`${this.baseUrl}/login`, user);
+  async login(credentials: LoginModel) {
+    const token = await axios.post(`${this.baseUrl}/login`, credentials);
+    return token;
   }
 
   async getRoles() {
     const respose = await axios.get(`${this.baseUrl}/roles`);
+    return respose.data;
+  }
+
+  async getUsers(filter?: UserFilterModel) {
+    const params = BuildFilter(filter);
+    const respose = await axios.get(`${this.baseUrl + params}`);
     return respose.data;
   }
 }

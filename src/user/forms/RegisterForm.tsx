@@ -1,9 +1,12 @@
-import FormRenderer from "../../utils/FormRenderer";
-import RegisterModel from "../models/RegisterModel";
-import RegisterFields from "./RegisterFields";
+import { FormRenderer } from "src/utils";
+import { RegisterFields } from "src/user/fields";
+import { RegisterModel } from "src/user/models";
+import { UserService } from "src/user/service";
 
 function RegisterForm() {
-  const onSubmit = (user: RegisterModel) => {};
+  const onSubmit = async (user: RegisterModel) => {
+    await UserService.register(user);
+  };
   return (
     <FormRenderer
       fields={RegisterFields}
