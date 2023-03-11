@@ -24,6 +24,11 @@ class Service {
     const respose = await axios.get(`${this.baseUrl + params}`);
     return respose.data;
   }
+
+  async getUserById(id: string) {
+    const respose = await axios.get(`${this.baseUrl}/${id}`);
+    return respose.data;
+  }
 }
 
 const UserService = new Service();

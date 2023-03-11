@@ -10,13 +10,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/user">
+        <Route path="user">
           <Route index element={<UserListPage />} />
           <Route path="register" element={<RegisterPage />} />
           <Route path="login" element={<LoginPage />} />
-          <Route path="edit" element={<EditUserPage />} />
+          <Route path=":id/edit" element={<EditUserPage />} />
         </Route>
-        <Route path="/post">
+        <Route path="post">
           <Route index element={<PostsPage />} />
         </Route>
       </Routes>

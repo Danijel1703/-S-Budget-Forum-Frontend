@@ -4,6 +4,7 @@ import { UserFilterModel, UserModel } from "src/user/models";
 import { map } from "lodash-es";
 import { PagingRenderer } from "src/utils";
 import { Paging } from "src/core/models";
+import { Link } from "react-router-dom";
 
 function UserListPage() {
   const [users, setUsers] = useState<UserModel[]>([]);
@@ -36,7 +37,10 @@ function UserListPage() {
           <p>{user.lastName}</p>
           <p>{user.email}</p>
           <p>{user.username}</p>
-          <hr />
+          <Link to={`${user.id}/edit`}>
+            <button>Edit</button>
+          </Link>
+          <button>Delete</button>
         </div>
       ))}
       <PagingRenderer

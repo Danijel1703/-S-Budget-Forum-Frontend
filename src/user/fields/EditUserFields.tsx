@@ -5,9 +5,8 @@ const EditUserFields = [
   ...RegisterFields,
   {
     fieldName: "Role",
-    property: "role",
+    property: "roleId",
     type: "select",
-    selectOptions: {},
     fetchFunc: async () => await UserService.getRoles(),
   },
 ];

@@ -22,7 +22,6 @@ function PagingRenderer(props: Props) {
       {map(pages, (page) => (
         <button
           key={page}
-          style={{ color: `${currentPage === page ? "green" : ""}` }}
           onClick={() => {
             paging.page = Number(page);
             onPageChange(paging);
