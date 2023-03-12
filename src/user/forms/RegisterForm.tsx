@@ -11,7 +11,7 @@ function RegisterForm() {
     <FormRenderer
       fields={RegisterFields}
       onSubmit={onSubmit}
-      submitPlaceholder={"Submit"}
+      submitPlaceholder="Register"
     />
   );
 }

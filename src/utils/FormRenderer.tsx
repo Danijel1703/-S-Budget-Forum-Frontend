@@ -1,5 +1,5 @@
 import { each, find, isEmpty, isFunction, map, uniqueId } from "lodash-es";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import Select from "react-select";
 import { FormFieldTypes } from "src/constants";
 import { FormFieldModel } from "src/core/models";
@@ -66,29 +66,34 @@ const RenderSelect = (props: {
     label: string;
     value: string;
   }>();
-  const fetchFunc = isFunction(field.fetchFunc) ? field.fetchFunc : () => {};
-  const fetchOptions = async () => await fetchFunc();
+  const fetchFunc = useMemo(() => {
+    return isFunction(field.fetchFunc) ? field.fetchFunc : () => {};
+  }, [field.fetchFunc]);
 
-  const initialize = async () => {
+  const initialize = useCallback(async () => {
     setIsLoading(true);
-    const options = await fetchOptions();
+    const options = await fetchFunc();
     const selectedDefault = find(
       options,
       (option) => option.id === defaultValue
     );
+
     setSelectDefault({
       label: selectedDefault.name,
       value: selectedDefault.id,
     });
+
     setIsLoading(false);
-  };
+  }, [defaultValue, fetchFunc]);
 
   useEffect(() => {
-    initialize();
-  }, []);
+    if (defaultValue) {
+      initialize();
+    }
+  }, [defaultValue, initialize]);
 
   const getOptions = async () => {
-    const options = await fetchOptions();
+    const options = await fetchFunc();
     each(options, (opt) => {
       opt.value = opt.id;
       opt.label = opt.name;

@@ -1,5 +1,10 @@
 import axios from "axios";
-import { RegisterModel, LoginModel, UserFilterModel } from "src/user/models";
+import {
+  RegisterModel,
+  LoginModel,
+  UserFilterModel,
+  UserModel,
+} from "src/user/models";
 import { BuildFilter } from "src/utils";
 
 class Service {
@@ -28,6 +33,14 @@ class Service {
   async getUserById(id: string) {
     const respose = await axios.get(`${this.baseUrl}/${id}`);
     return respose.data;
+  }
+
+  async deleteUser(id: string) {
+    await axios.delete(`${this.baseUrl}/${id}`);
+  }
+
+  async updateUser(resource: UserModel) {
+    await axios.put(`${this.baseUrl}/${resource.id}`, resource);
   }
 }
 
